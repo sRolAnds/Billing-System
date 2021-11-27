@@ -23,7 +23,9 @@ public class Store {
             new Product(9, "Nisi id", 0.54),
             new Product(10, "Sictum lacus", 53.70)
     ));
-    private List<Cashier> cashiers = new ArrayList<>(List.of(new Cashier(1234)));
+    private List<Cashier> cashiers = new ArrayList<>(List.of(
+            new Cashier(1234)
+    ));
     private List<DiscountCard> validDiscountCards = List.of(
             new DiscountCard(1234, 5.0),
             new DiscountCard(2345, 7.0),
