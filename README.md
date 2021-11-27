@@ -10,7 +10,7 @@ java -classpath ./out/production/project com/roland/AppRunner <parameter_set>
 ```
 
 where the parameter set in format: itemId-quantity (id of product and its quantity).<br />
-For example:
+**For example:**
 ```
 java -classpath ./out/production/project com/roland/AppRunner 3-1 2-5 5-1 card-1234 
 ```
