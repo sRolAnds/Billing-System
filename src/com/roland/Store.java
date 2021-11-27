@@ -2,6 +2,7 @@ package com.roland;
 
 import com.roland.exceptions.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +11,7 @@ public class Store {
     private final String name;
     private final String address;
     private final String phoneNumber;
-    private List<Product> inventory = List.of(
+    private List<Product> inventory = new ArrayList<>(List.of(
             new Product(1, "Loren ipsun", 1.55),
             new Product(2, "Dolor", 2.34),
             new Product(3, "Sir amet", 3.32),
@@ -21,8 +22,8 @@ public class Store {
             new Product(8, "At velit", 17.80),
             new Product(9, "Nisi id", 0.54),
             new Product(10, "Sictum lacus", 53.70)
-    );
-    private List<Cashier> cashiers = List.of(new Cashier(1234));
+    ));
+    private List<Cashier> cashiers = new ArrayList<>(List.of(new Cashier(1234)));
     private List<DiscountCard> validDiscountCards = List.of(
             new DiscountCard(1234, 5.0),
             new DiscountCard(2345, 7.0),
