@@ -1,1 +1,25 @@
-Bill content ...
+                       CASH RECEIPT
+                     SUPERMARKET Lidl
+             14, Stare Mesto, Kosice/Slovakia
+                    Tel: 123-456-7890
+
+CASHIER: #1234                        DATE: 28/11/2021
+                                      TIME: 22:27:31
+-------------------------------------------------------
+  QTY	DESCRIPTION         	     PRICE	     TOTAL
+
+   5	Milk                	     $1,39	     $6,95
+   6	Water 2l            	     $0,40	     $2,38
+              promotional item                  -$0,24
+  15	Onion               	     $0,79	    $11,85
+   2	Yogurt 450ml        	     $0,69	     $1,38
+   4	Elit                	     $4,56	    $18,24
+   1	Integer             	     $2,67	     $2,67
+   6	Placerat massa      	    $37,64	   $225,84
+   4	At velit            	    $17,80	    $71,20
+  11	Nisi id             	     $0,54	     $5,94
+-------------------------------------------------------
+-------------------------------------------------------
+SUBTOTAL                                       $346,21
+Discount card was not used.
+TOTAL                                          $346,21

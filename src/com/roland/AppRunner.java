@@ -8,7 +8,7 @@ public class AppRunner {
         store.setDiscountPriceToProduct(2, 10);
         Order order = makeOrder(args);
         Bill bill = store.takeOrder(order);
-        bill.displayInfo(store);
+        bill.printToFile();
     }
 
     private static Order makeOrder(String[] args) {

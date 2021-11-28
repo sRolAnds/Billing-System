@@ -3,6 +3,8 @@ package com.roland;
 import com.roland.exceptions.*;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +33,7 @@ public class Store {
     }
 
     public Bill takeOrder(Order order) {
-        Bill bill = new Bill();
+        Bill bill = new Bill(this);
         for (Map.Entry<Integer, Integer> entry : order.getItems().entrySet()) {
             try {
                 Product product = getProductById(entry.getKey());
@@ -97,11 +99,11 @@ public class Store {
         return new DiscountCard(cardId, cardDiscount);
     }
 
-    public void displayInfo() {
-        System.out.printf("%35s\n", "CASH RECEIPT");
-        System.out.printf("%37s\n", "SUPERMARKET " + name);
-        System.out.printf("%45s\n", address);
-        System.out.printf("%37s\n\n", "Tel: " + phoneNumber);
+    public void printInfo(FileWriter fileWriter) throws IOException {
+        fileWriter.write(String.format("%35s\n", "CASH RECEIPT"));
+        fileWriter.write(String.format("%37s\n", "SUPERMARKET " + name));
+        fileWriter.write(String.format("%45s\n", address));
+        fileWriter.write(String.format("%37s\n\n", "Tel: " + phoneNumber));
     }
 
     private Product getProductById(int id) throws UnknownProductException {
@@ -113,10 +115,14 @@ public class Store {
         throw new UnknownProductException("No such product in store with id = " + id);
     }
 
-    public void setDiscountPriceToProduct(int productId, double discountSize) throws UnknownProductException {
-        Product product = getProductById(productId);
-        product.setPromotional(true);
-        product.setPrice(product.getPrice() * (100 - discountSize) / 100);
+    public void setDiscountPriceToProduct(int productId, double discountSize) {
+        try {
+            Product product = getProductById(productId);
+            product.setPromotional(true);
+            product.setPrice(product.getPrice() * (100 - discountSize) / 100);
+        } catch (UnknownProductException e) {
+            System.out.println("We cannot set another price to product, which does not exist");
+        }
     }
 
     private DiscountCard getDiscountCardById(int id) throws UnknownDiscountCardException {
