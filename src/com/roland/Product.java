@@ -13,11 +13,15 @@ public class Product {
         this.price = price;
     }
 
-    public Product(int id, String description, double price, boolean isPromotional) {
-        this.id = id;
-        this.description = description;
-        this.price = price;
-        this.isPromotional = isPromotional;
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Product{");
+        sb.append("id=").append(id);
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", price=").append(price);
+        sb.append(", isPromotional=").append(isPromotional);
+        sb.append('}');
+        return sb.toString();
     }
 
     public int getId() {

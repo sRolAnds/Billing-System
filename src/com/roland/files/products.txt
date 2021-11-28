@@ -1,0 +1,12 @@
+1,Milk,1.39
+2,Water 2l,0.44
+3,Onion,0.79
+4,Yogurt 450ml,0.69
+5,Elit,4.56
+6,Integer,2.67
+7,Placerat massa,37.64
+8,At velit,17.80
+9,Nisi id,0.54
+10,Sictum lacus,53.70
+34,Double,22.75
+76,Setoza,18.05

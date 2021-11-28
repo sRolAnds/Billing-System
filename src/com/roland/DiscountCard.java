@@ -10,6 +10,15 @@ public class DiscountCard {
         this.discountSize = discountSize;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("DiscountCard{");
+        sb.append("id=").append(id);
+        sb.append(", discountSize=").append(discountSize);
+        sb.append('}');
+        return sb.toString();
+    }
+
     public double getDiscount(double sum) {
         return sum * discountSize / 100;
     }

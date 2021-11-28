@@ -2,40 +2,32 @@ package com.roland;
 
 import com.roland.exceptions.*;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Store {
+
+    private static final String INVENTORY_PATH = "src/com/roland/files/products.txt";
+    private static final String CARDS_PATH = "src/com/roland/files/cards.txt";
 
     private final String name;
     private final String address;
     private final String phoneNumber;
-    private List<Product> inventory = new ArrayList<>(List.of(
-            new Product(1, "Loren ipsun", 1.55),
-            new Product(2, "Dolor", 2.34),
-            new Product(3, "Sir amet", 3.32),
-            new Product(4, "Consectelur adiping", 10.5),
-            new Product(5, "Elit", 4.56),
-            new Product(6, "Integer", 2.67),
-            new Product(7, "Placerat massa", 37.64),
-            new Product(8, "At velit", 17.80),
-            new Product(9, "Nisi id", 0.54),
-            new Product(10, "Sictum lacus", 53.70)
-    ));
+    private List<Product> inventory;
+    private List<DiscountCard> discountCards;
     private List<Cashier> cashiers = new ArrayList<>(List.of(
             new Cashier(1234)
     ));
-    private List<DiscountCard> validDiscountCards = List.of(
-            new DiscountCard(1234, 5.0),
-            new DiscountCard(2345, 7.0),
-            new DiscountCard(3456, 10.0)
-    );
 
     public Store(String name, String address, String phoneNumber) {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.inventory = readProductsFromFile();
+        this.discountCards = readDiscountCardsFromFile();
     }
 
     public Bill takeOrder(Order order) {
@@ -58,6 +50,57 @@ public class Store {
             }
         }
         return bill;
+    }
+
+    private static List<String> readDataFromFile(String filePath) {
+        List<String> data = new ArrayList<>();
+        Scanner reader = null;
+        try {
+            File file = new File(filePath);
+            reader = new Scanner(file);
+            while (reader.hasNextLine()) {
+                data.add(reader.nextLine());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null)
+                reader.close();
+        }
+        return data;
+    }
+
+    public List<Product> readProductsFromFile() {
+        List<Product> products = new ArrayList<>();
+        for (String item : readDataFromFile(INVENTORY_PATH)) {
+            Product product = parseProduct(item);
+            products.add(product);
+        }
+        return products;
+    }
+
+    public List<DiscountCard> readDiscountCardsFromFile() {
+        List<DiscountCard> cards = new ArrayList<>();
+        for (String item : readDataFromFile(CARDS_PATH)) {
+            DiscountCard discountCard = parseCard(item);
+            cards.add(discountCard);
+        }
+        return cards;
+    }
+
+    private static Product parseProduct(String data) {
+        String[] s = data.split(",");
+        int productId = Integer.parseInt(s[0]);
+        String productName = s[1];
+        double productPrice = Double.parseDouble(s[2]);
+        return new Product(productId, productName, productPrice);
+    }
+
+    private static DiscountCard parseCard(String data) {
+        String[] s = data.split(",");
+        int cardId = Integer.parseInt(s[0]);
+        double cardDiscount = Double.parseDouble(s[1]);
+        return new DiscountCard(cardId, cardDiscount);
     }
 
     public void displayInfo() {
@@ -83,7 +126,7 @@ public class Store {
     }
 
     private DiscountCard getDiscountCardById(int id) throws UnknownDiscountCardException {
-        for (DiscountCard discountCard : validDiscountCards) {
+        for (DiscountCard discountCard : discountCards) {
             if (discountCard.getId() == id) {
                 return discountCard;
             }
@@ -91,12 +134,16 @@ public class Store {
         throw new UnknownDiscountCardException("Store does not support discount card with id = " + id);
     }
 
-    public void addProductToInventory(int id, String description, double price) {
-        inventory.add(new Product(id, description, price));
-    }
+//    public void addProductToInventory(int id, String description, double price) {
+//        inventory.add(new Product(id, description, price));
+//    }
 
     public List<Product> getInventory() {
         return inventory;
+    }
+
+    public List<DiscountCard> getDiscountCards() {
+        return discountCards;
     }
 
     public List<Cashier> getCashiers() {
