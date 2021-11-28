@@ -54,18 +54,12 @@ public class Store {
 
     private static List<String> readDataFromFile(String filePath) {
         List<String> data = new ArrayList<>();
-        Scanner reader = null;
-        try {
-            File file = new File(filePath);
-            reader = new Scanner(file);
+        try(Scanner reader = new Scanner(new File(filePath))) {
             while (reader.hasNextLine()) {
                 data.add(reader.nextLine());
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (reader != null)
-                reader.close();
         }
         return data;
     }
