@@ -14,10 +14,10 @@ where the parameter set in format: itemId-quantity (id of product and its quanti
 ```
 java -classpath ./out/production/project com/roland/AppRunner 3-1 2-5 5-1 card-1234 
 ```
-should generate and print to console a check that contains the name of the product with id = 3 
+should generate and write to file a check that contains the name of the product with id = 3 
 in the amount of 1,<br /> 
 id = 2 in the amount of 5, etc. Card-1234 means, 
 that discount card with id = 1234 was used.<br />
-So, the task is print check to console, that contains a list of items, 
+So, the task is write check to file, that contains a list of items, 
 their quantity, their price and total sum<br />
 including discount by card(if used).
